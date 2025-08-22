@@ -32,6 +32,9 @@ LOCAL_SRC_FILES := ../Main/Main.cpp \
                    ../Include/ImGui/imgui_demo.cpp \
                    ../Include/ImGui/imgui_tables.cpp \
                    ../Include/ImGui/imgui_widgets.cpp \
+                   ../Include/ImGuiSoftKeyboard.cpp \
+                   ../Include/ImGuiSoftKeyboardJNI.cpp \
+                   ../Include/ImGuiSoftKeyboardExample.cpp \
 				   ../Include/xdl/xdl.c \
 				   ../Include/xdl/xdl_iterate.c \
 				   ../Include/xdl/xdl_linker.c \

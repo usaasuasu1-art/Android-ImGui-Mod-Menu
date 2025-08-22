@@ -9,13 +9,23 @@ import android.util.Log;
 import android.view.View;
 
 import com.reveny.imgui.mod.test.myGlSurfaceView;
+import com.reveny.imgui.mod.SoftKeyboardManager;
+import com.reveny.imgui.mod.ImGuiKeyboardBridge;
 
 public class MainActivity extends Activity {
+
+    private SoftKeyboardManager mSoftKeyboardManager;
+    private ImGuiKeyboardBridge mKeyboardBridge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Initialize soft keyboard manager
+        mSoftKeyboardManager = new SoftKeyboardManager(this);
+        mKeyboardBridge = ImGuiKeyboardBridge.getInstance();
+        mKeyboardBridge.initialize(mSoftKeyboardManager);
 
         //Taken from https://github.com/JimSeker/opengl/blob/master/OpenGL30Cube/app/src/main/java/edu/cs4730/opengl30cube/MainActivity.java
         if (detectOpenGLES30()) {
@@ -47,6 +57,14 @@ public class MainActivity extends Activity {
                             | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                             | View.SYSTEM_UI_FLAG_FULLSCREEN);
+        }
+    }
+    
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mKeyboardBridge != null) {
+            mKeyboardBridge.destroy();
         }
     }
 }
